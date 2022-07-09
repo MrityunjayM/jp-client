@@ -10,8 +10,11 @@ const MainNavigation = () => {
         <Link style={{ margin: 10 }} to="login">
           LogIn
         </Link>
-        <Link style={{ margin: 10 }} to="/addbattle">
+        <Link style={{ margin: 10 }} to="addbattle">
           AddBattle
+        </Link>
+        <Link style={{ display: "none" }} to="allbattle">
+          AllBattle
         </Link>
       </div>
     </>
