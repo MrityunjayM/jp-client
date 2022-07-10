@@ -21,6 +21,7 @@ const GiveCoinToUser = () => {
       const foundUser = await axios.post("/api/cointouser", { phoneNo });
       const { status } = foundUser;
       if (status == 200) {
+        // console.log("balajee mishra");
         setToFoundUser(true);
       }
     } else {
