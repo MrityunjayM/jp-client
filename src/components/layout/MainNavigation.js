@@ -16,6 +16,9 @@ const MainNavigation = () => {
         <Link style={{ display: "none" }} to="allbattle">
           AllBattle
         </Link>
+        <Link style={{ margin: 10 }} to="givecointouser">
+          GiveCoinToUser
+        </Link>
       </div>
     </>
   );

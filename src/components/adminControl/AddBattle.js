@@ -25,7 +25,6 @@ const AddBattle = () => {
       orderInput,
     });
     // now handle this as you wantt
-    console.log(uploadData.status);
     if (uploadData.status == 200) {
       navigate("/allbattle");
     }

@@ -7,11 +7,10 @@ const { Provider } = battleContext;
 export const BattleProvider = ({ children }) => {
   const [battleData, setBattleData] = useState([]);
   const fetchBattle = async () => {
-    const data = await axios.get("/api/categoryofgame");
-
-    console.log(data, "MRITYUNJAYY");
+    const battle = await axios.get("/api/categoryofgame");
+    return battle;
+    // setBattleData(battle.data);
   };
-
   return (
     <Provider value={{ fetchBattle, battleData, setBattleData }}>
       {children}
