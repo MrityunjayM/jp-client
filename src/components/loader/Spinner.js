@@ -5,6 +5,7 @@ import "./spinner.css";
 
 function Spinner() {
   const { loading } = useContext(spinnerContext);
+
   return (
     <div className="App">
       <ClipLoader loading={loading} size={50} />

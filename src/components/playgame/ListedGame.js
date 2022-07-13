@@ -14,9 +14,8 @@ import axios from "axios";
 
 const ListedGame = () => {
   const { fetchBattle, battleData, setBattleData } = useContext(battleContext);
-  const { setLoading } = useContext(spinnerContext);
+  const { setLoading, loading } = useContext(spinnerContext);
   const navigate = useNavigate();
-
   useEffect(() => {
     fn();
   }, []);
@@ -33,6 +32,7 @@ const ListedGame = () => {
     waitingPlayer
   ) => {
     setLoading(true);
+    let x = 0;
     const timer = setInterval(async () => {
       const checkingwait = await axios.post("/api/playgame/waitingplayer", {
         name,
@@ -40,17 +40,29 @@ const ListedGame = () => {
         numberofPlayers,
         waitingPlayer,
       });
-      console.log("balajee");
-      if (checkingwait.status == 202 && checkingwait.data) {
-        clearTimer();
-        console.log(checkingwait);
+      console.log(loading, "bala");
+      if ((checkingwait.status == 202 && checkingwait.data) || ++x == 45) {
+        clearTimer(x);
       }
     }, 1000);
 
-    const clearTimer = () => {
+    const clearTimer = async (x) => {
       clearInterval(timer);
+      setLoading(false);
+      if (x == 45) {
+        const giveCommandtoadmin = await await axios.post(
+          "/api/playgame/giveittoadmin",
+          {
+            name,
+            pricetoenter,
+            numberofPlayers,
+            waitingPlayer,
+          }
+        );
+        console.log(giveCommandtoadmin, "balajee mishra");
+      }
     };
-    setLoading(false);
+
     // navigate("/gameplayinput", {
     //   state: {
     //     name,
