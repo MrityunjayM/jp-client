@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { authContext } from "../context/authContext";
+import { spinnerContext } from "../context/spinnerContext";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./spinner.css";
+
 function Spinner() {
-  const { loading } = useContext(authContext);
+  const { loading } = useContext(spinnerContext);
   return (
     <div className="App">
       <ClipLoader loading={loading} size={50} />

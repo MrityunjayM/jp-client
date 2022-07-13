@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./components/context/authContext";
 import { BattleProvider } from "./components/context/battleContext";
+import { SpinnerProvider } from "./components/context/spinnerContext";
+import GameProvider from "./components/context/gameContext";
 import MainNavigation from "./components/layout/MainNavigation";
 import SignUp from "./components/user/Signup";
 import LogIn from "./components/user/Login";
@@ -12,34 +14,44 @@ import AllBattle from "./components/adminControl/AllBattle";
 import EditBattle from "./components/adminControl/EditBattle";
 import GiveCoinToUser from "./components/adminControl/GiveCointouser";
 import Coinofuser from "./components/adminControl/CoinofUser";
+import ListedGame from "./components/playgame/ListedGame";
+import GamePlayInput from "./components/playgame/GamePlayInput";
 // import Home from "./components/layout/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
   return (
     <Router>
-      <AuthProvider>
-        {/* Static component */}
+      <SpinnerProvider>
+        <AuthProvider>
+          {/* Static component */}
 
-        <MainNavigation />
-        <Spinner />
+          <MainNavigation />
+          <Spinner />
 
-        {/* Routing component */}
-        <BattleProvider>
-          <Routes>
-            <Route exact path="/signup" element={<SignUp />} />
-            {/* <Route exact path="/home" element={<Home />} /> */}
-            <Route exact path="/login" element={<LogIn />} />
-            // battle part
-            <Route exact path="/addbattle" element={<AddBattle />} />
-            <Route exact path="/allbattle" element={<AllBattle />} />
-            <Route exact path="/edit/:id" element={<EditBattle />} />
-            {/* // for adding coin to user  */}
-            <Route exact path="/givecointouser" element={<GiveCoinToUser />} />
-            <Route exact path="/coinofuser" element={<Coinofuser />} />
-            {/* <Route exact path="/delete/:id" element={<DeleteBattle />} /> */}
-          </Routes>
-        </BattleProvider>
-      </AuthProvider>
+          {/* Routing component */}
+          <BattleProvider>
+            <Routes>
+              <Route exact path="/signup" element={<SignUp />} />
+              {/* <Route exact path="/home" element={<Home />} /> */}
+              <Route exact path="/login" element={<LogIn />} />
+              // battle part
+              <Route exact path="/addbattle" element={<AddBattle />} />
+              <Route exact path="/allbattle" element={<AllBattle />} />
+              <Route exact path="/edit/:id" element={<EditBattle />} />
+              {/* // for adding coin to user  */}
+              <Route
+                exact
+                path="/givecointouser"
+                element={<GiveCoinToUser />}
+              />
+              <Route exact path="/coinofuser" element={<Coinofuser />} />
+              <Route exact path="/listedgame" element={<ListedGame />} />
+              <Route exact path="/gameplayinput" element={<GamePlayInput />} />
+              {/* <Route exact path="/delete/:id" element={<DeleteBattle />} /> */}
+            </Routes>
+          </BattleProvider>
+        </AuthProvider>
+      </SpinnerProvider>
     </Router>
   );
 };

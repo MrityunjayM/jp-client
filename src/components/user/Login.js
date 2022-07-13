@@ -46,8 +46,3 @@ const LogIn = () => {
   );
 };
 export default LogIn;
-
-// import { getAuth } from "firebase/auth";
-
-// const auth = getAuth();
-// const user = auth.currentUser;

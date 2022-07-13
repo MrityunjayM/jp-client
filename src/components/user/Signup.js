@@ -1,5 +1,5 @@
 import classes from "./SignUp.module.css";
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useState } from "react";
 import { authContext } from "../context/authContext";
 
 function SignUp() {
@@ -11,7 +11,6 @@ function SignUp() {
       event.preventDefault();
       const phoneInput = phoneInputRef.current.value;
       const passwordValue = password.current.value;
-      // console.log("balajee", phoneInput, passwordValue);
       await SignUp(phoneInput, passwordValue);
     } catch (e) {
       alert(e);

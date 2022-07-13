@@ -1,17 +1,16 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { spinnerContext } from "./spinnerContext";
 import axios from "axios";
 export const authContext = createContext();
 const { Provider } = authContext;
+
 export const AuthProvider = ({ children }) => {
   // const [authToken, setAuthToken] = useState(null);
+  const { loading, setLoading } = useContext(spinnerContext);
   const navigate = useNavigate();
   //for spinner purpose.
-  let [loading, setLoading] = useState(false);
   let [user_log, setUserLog] = useState(null);
-
-  useEffect(() => {}, []);
-
   const SignOut = async () => {
     // sessionStorage.removeItem("Auth Token");
   };
@@ -36,7 +35,6 @@ export const AuthProvider = ({ children }) => {
       phoneInput,
       passwordValue,
     });
-    console.log(dataTosubmit);
     if (dataTosubmit.status == 200) {
       setUserLog(dataTosubmit.data.user_log);
       setLoading(false);
