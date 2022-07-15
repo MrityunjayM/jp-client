@@ -42,15 +42,15 @@ const ListedGame = () => {
       });
       console.log(loading, "bala");
       if ((checkingwait.status == 202 && checkingwait.data) || ++x == 45) {
-        clearTimer(x);
+        clearTimer(x, checkingwait);
       }
     }, 1000);
 
-    const clearTimer = async (x) => {
+    const clearTimer = async (x, checkingwait) => {
       clearInterval(timer);
       setLoading(false);
       if (x == 45) {
-        const giveCommandtoadmin = await await axios.post(
+        const giveCommandtoadmin = await axios.post(
           "/api/playgame/giveittoadmin",
           {
             name,
@@ -61,16 +61,20 @@ const ListedGame = () => {
         );
         console.log(giveCommandtoadmin, "balajee mishra");
       }
-    };
 
-    // navigate("/gameplayinput", {
-    //   state: {
-    //     name,
-    //     pricetoenter,
-    //     numberofPlayers,
-    //     waitingPlayer,
-    //   },
-    // });
+      if (checkingwait.data.user == "opponentuser") {
+        navigate("/gameplayinput", {
+          state: { data: checkingwait.data },
+        });
+      }
+
+      if (checkingwait.data.user == "user") {
+        console.log(checkingwait.data, "userrrrrr");
+        navigate("/waitingforcode", {
+          state: { data: checkingwait.data },
+        });
+      }
+    };
   };
   // <Spinner />
   return (

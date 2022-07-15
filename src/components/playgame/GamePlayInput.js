@@ -1,40 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Form } from "reactstrap";
 import axios from "axios";
 const GamePlayInput = () => {
   const location = useLocation();
-  const { name, pricetoenter, numberofPlayers, waitingPlayer } = location.state;
+  const { data } = location.state;
   const [roomCode, setRoomCode] = useState();
-  //   alert("please open the ludo king app and enter the room code here.");
+  const [second, setSecond] = useState(180);
   const playthegame = async (e) => {
     e.preventDefault();
-    console.log(roomCode);
-    const entryindatabase = await axios.post("/api/playgame/addroomcode", {
-      roomCode,
-      name,
-      pricetoenter,
-      numberofPlayers,
-      waitingPlayer,
-    });
+    const entryindatabase = await axios.post("/api/playgame/addroomcode", {});
     console.log(entryindatabase.data.message);
   };
+  useEffect(() => {
+    setTimer();
+  }, []);
+  const setTimer = () => {
+    let t = 0;
+    let intervalId = setInterval(() => {
+      t = t + 1;
+      setSecond(second - t);
+      if (t == 180) {
+        clearTimer();
+      }
+    }, 1000);
+    const clearTimer = () => {
+      clearInterval(intervalId);
+    };
+  };
+
   return (
     <>
-      <h1>please open the ludo king app and enter the room code here.</h1>
-      <form onSubmit={playthegame}>
+      {data ? (
         <div>
-          <label>Enter the Room code here...</label>
-          <input
-            type="number"
-            placeholder="Enter the Room code here..."
-            onChange={(e) => setRoomCode(e.target.value)}
-          />
+          <h1>
+            hey you got a match with user {data.matchesforother.user.phoneNo}
+          </h1>
+          <h1>please open the ludo king app and enter the room code here.</h1>
+          <h1>please respond in given time interval: {second}</h1>
+          <form onSubmit={playthegame}>
+            <div>
+              <label>Enter the Room code here...</label>
+              <input
+                type="number"
+                placeholder="Enter the Room code here..."
+                onChange={(e) => setRoomCode(e.target.value)}
+              />
+            </div>
+            <div>
+              <button type="submit">Find your opponent</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <button type="submit">Find your opponent</button>
-        </div>
-      </form>
+      ) : (
+        ""
+      )}
     </>
   );
 };
