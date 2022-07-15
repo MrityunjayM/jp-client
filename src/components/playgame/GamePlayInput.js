@@ -2,30 +2,57 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Form } from "reactstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const GamePlayInput = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { data } = location.state;
   const [roomCode, setRoomCode] = useState();
-  const [second, setSecond] = useState(180);
+  const [second, setSecond] = useState(20);
+
   const playthegame = async (e) => {
     e.preventDefault();
-    const entryindatabase = await axios.post("/api/playgame/addroomcode", {});
-    console.log(entryindatabase.data.message);
+    const entryindatabase = await axios.post("/api/playgame/addroomcode", {
+      data,
+      roomCode,
+    });
+    if (entryindatabase.status == 200) {
+      setTimer(1);
+    }
   };
+
   useEffect(() => {
     setTimer();
   }, []);
-  const setTimer = () => {
+
+  const setTimer = (information) => {
     let t = 0;
     let intervalId = setInterval(() => {
       t = t + 1;
       setSecond(second - t);
-      if (t == 180) {
+      if (t == 20 || information == 1) {
         clearTimer();
       }
     }, 1000);
+
     const clearTimer = () => {
       clearInterval(intervalId);
+      if (!roomCode) {
+        navigate("/gameexpired", {
+          state: {
+            gameexpired: true,
+          },
+        });
+      }
+
+      // if they will enter the roomcode and submit that successfully....
+      if (roomCode) {
+        navigate("/startthegame", {
+          state: {
+            gameexpired: true,
+          },
+        });
+      }
     };
   };
 

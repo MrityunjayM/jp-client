@@ -18,6 +18,7 @@ import Coinofuser from "./components/adminControl/CoinofUser";
 import ListedGame from "./components/playgame/ListedGame";
 import GamePlayInput from "./components/playgame/GamePlayInput";
 import Waitingforcode from "./components/playgame/Waitingforcode";
+import GameExpired from "./components/playgame/GameExpired";
 // import Home from "./components/layout/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
@@ -59,7 +60,7 @@ const App = () => {
                   path="/waitingforcode"
                   element={<Waitingforcode />}
                 />
-                {/* <Route exact path="/delete/:id" element={<DeleteBattle />} /> */}
+                <Route exact path="/gameexpired" element={<GameExpired />} />
               </Routes>
             </BattleProvider>
           </TimerProvider>

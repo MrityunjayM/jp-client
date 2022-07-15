@@ -1,24 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const Waitingforcode = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data } = location.state;
-  const [second, setSecond] = useState(180);
+  const [second, setSecond] = useState(20);
+  const [roomCode, setRoomCode] = useState();
 
   useEffect(() => {
     setTimer();
   }, []);
+
   const setTimer = () => {
     let t = 0;
-    let intervalId = setInterval(() => {
+    let intervalId = setInterval(async () => {
       t = t + 1;
       setSecond(second - t);
-      if (t == 180) {
+      if (t == 20) {
         clearTimer();
       }
+      const findingTheCode = await axios.get("/api/playgame/getroomcode");
+      if (findingTheCode.status == 202) {
+        // findingTheCode.data.roomCode
+        setRoomCode("12345");
+        clearTimer(findingTheCode.status);
+      }
+      console.log(roomCode, "bala");
     }, 1000);
-    const clearTimer = () => {
+
+    const clearTimer = (status) => {
       clearInterval(intervalId);
+      if (!roomCode) {
+        navigate("/gameexpired", {
+          state: {
+            gameexpired: false,
+          },
+        });
+      }
     };
   };
 
