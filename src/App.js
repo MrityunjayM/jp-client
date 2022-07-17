@@ -20,6 +20,7 @@ import GamePlayInput from "./components/playgame/GamePlayInput";
 import Waitingforcode from "./components/playgame/Waitingforcode";
 import GameExpired from "./components/playgame/GameExpired";
 import ImageUploader from "./components/aftergame/ImageUploader";
+import StarttheGame from "./components/playgame/StarttheGame";
 // import Home from "./components/layout/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
@@ -62,6 +63,7 @@ const App = () => {
                   element={<Waitingforcode />}
                 />
                 <Route exact path="/gameexpired" element={<GameExpired />} />
+                <Route exact path="/startthegame" element={<StarttheGame />} />
                 <Route
                   exact
                   path="/imageuploader"

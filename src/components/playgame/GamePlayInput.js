@@ -49,7 +49,7 @@ const GamePlayInput = () => {
       if (roomCode) {
         navigate("/startthegame", {
           state: {
-            gameexpired: true,
+            gamestart: true,
           },
         });
       }

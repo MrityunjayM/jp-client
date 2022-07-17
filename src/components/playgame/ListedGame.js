@@ -49,6 +49,7 @@ const ListedGame = () => {
     const clearTimer = async (x, checkingwait) => {
       clearInterval(timer);
       setLoading(false);
+      // this is for admin purpose...
       if (x == 45) {
         const giveCommandtoadmin = await axios.post(
           "/api/playgame/giveittoadmin",
@@ -59,7 +60,7 @@ const ListedGame = () => {
             waitingPlayer,
           }
         );
-        console.log(giveCommandtoadmin, "balajee mishra");
+        alert("command of this section will goes to adminnn");
       }
 
       if (checkingwait.data.user == "opponentuser") {
@@ -69,7 +70,6 @@ const ListedGame = () => {
       }
 
       if (checkingwait.data.user == "user") {
-        console.log(checkingwait.data, "userrrrrr");
         navigate("/waitingforcode", {
           state: { data: checkingwait.data },
         });

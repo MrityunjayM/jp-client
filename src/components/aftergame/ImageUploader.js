@@ -15,12 +15,15 @@ function ImageUploader() {
       formData
     );
     if (imageresult.status == 202) {
+      const afterverification = await axios.get("/api/playgame/afterverify");
       setLoading(false);
       alert("matched");
+      alert(afterverification.data.message);
     }
     if (imageresult.status != 202) {
+      console.log(imageresult, "balajee");
       setLoading(false);
-      alert("not matched");
+      alert(imageresult.data.message);
     }
   };
 

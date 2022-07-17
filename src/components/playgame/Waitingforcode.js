@@ -39,6 +39,9 @@ const Waitingforcode = () => {
           },
         });
       }
+      if (status == 202) {
+        navigate("/startthegame");
+      }
     };
   };
 
