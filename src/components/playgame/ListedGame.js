@@ -11,11 +11,13 @@ import { battleContext } from "../context/battleContext";
 import { spinnerContext } from "../context/spinnerContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import classes from "./Game.module.css";
 
 const ListedGame = () => {
   const { fetchBattle, battleData, setBattleData } = useContext(battleContext);
   const { setLoading, loading } = useContext(spinnerContext);
   const navigate = useNavigate();
+
   useEffect(() => {
     fn();
   }, []);
@@ -80,7 +82,7 @@ const ListedGame = () => {
   return (
     <div>
       {battleData.map((e) => (
-        <Card>
+        <Card className={classes.styled_card}>
           <CardBody>
             <CardTitle tag="h5">{e.name}</CardTitle>
             <CardSubtitle className="mb-2 text-muted" tag="h6">

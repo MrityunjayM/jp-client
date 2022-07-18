@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Form } from "reactstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const GamePlayInput = () => {
@@ -41,6 +40,7 @@ const GamePlayInput = () => {
         navigate("/gameexpired", {
           state: {
             gameexpired: true,
+            data,
           },
         });
       }
@@ -60,9 +60,7 @@ const GamePlayInput = () => {
     <>
       {data ? (
         <div>
-          <h1>
-            hey you got a match with user {data.matchesforother.user.phoneNo}
-          </h1>
+          <h1>hey you got a match with user {data.matchesforother.user}</h1>
           <h1>please open the ludo king app and enter the room code here.</h1>
           <h1>please respond in given time interval: {second}</h1>
           <form onSubmit={playthegame}>

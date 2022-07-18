@@ -25,3 +25,17 @@ input {
   height: 2em;
   margin: 5px 40px !important; /* auto kyon nhi kam kar raha hai. */
 }
+
+/* for showing and hiding the input */
+.pwd_container {
+  position: relative;
+  width: 295px;
+}
+ 
+.pwd_container img {
+  cursor: pointer;
+  position: absolute;
+  width: 20px;
+  right: 22px;
+  top: 12px;
+}

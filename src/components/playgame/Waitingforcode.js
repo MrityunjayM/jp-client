@@ -27,7 +27,6 @@ const Waitingforcode = () => {
         setRoomCode("12345");
         clearTimer(findingTheCode.status);
       }
-      console.log(roomCode, "bala");
     }, 1000);
 
     const clearTimer = (status) => {
@@ -36,6 +35,7 @@ const Waitingforcode = () => {
         navigate("/gameexpired", {
           state: {
             gameexpired: false,
+            data,
           },
         });
       }
@@ -51,7 +51,7 @@ const Waitingforcode = () => {
         <div>
           <h1>
             hey you got a match with user
-            {data.findingthematch.opponentuser.phoneNo}
+            {data.findingthematch.opponentuser}
           </h1>
           <h1>
             Please wait for 3 minutes, you will get the room code of ludo king

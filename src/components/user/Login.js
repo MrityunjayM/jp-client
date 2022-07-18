@@ -1,11 +1,13 @@
 import React, { useRef, useContext } from "react";
 import { authContext } from "../context/authContext";
+import showPwdImg from "./show-password.svg";
+import hidePwdImg from "./hide-password.svg";
 // import PhoneInput from "react-phone-input-2";
 // import 'react-phone-input-2/lib/style.css'
 import classes from "./SignUp.module.css";
 
 const LogIn = () => {
-  const { SignIn } = useContext(authContext);
+  const { SignIn, isRevealPwd, setIsRevealPwd } = useContext(authContext);
   const phoneInputRef = useRef();
   const password = useRef();
   async function submitHandler(event) {
@@ -30,12 +32,17 @@ const LogIn = () => {
             ref={phoneInputRef}
           />
         </div>
-        <div className={classes.form_control}>
+        <div className={classes.pwd_container}>
           <input
-            type="password"
+            type={isRevealPwd ? "text" : "password"}
             required
             placeholder="Password"
             ref={password}
+          />
+          <img
+            title={isRevealPwd ? "Hide password" : "Show password"}
+            src={isRevealPwd ? hidePwdImg : showPwdImg}
+            onClick={() => setIsRevealPwd((prevState) => !prevState)}
           />
         </div>
         <div className={classes.form_control}>
