@@ -25,6 +25,9 @@ const MainNavigation = () => {
         <Link style={{ margin: 10 }} to="imageuploader">
           Upload the image
         </Link>
+        <Link style={{ margin: 10 }} to="superadmin">
+          superAdmin
+        </Link>
       </div>
     </>
   );

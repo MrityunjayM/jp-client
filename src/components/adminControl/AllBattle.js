@@ -9,19 +9,20 @@ const AllBattle = () => {
   //temprory solution.
   //   const [battleDatas, setBattleDatas] = useState([]);
   useEffect(() => {
-    const fn = async () => {
-      const battle = await fetchBattle();
-      setBattleData(battle.data);
-    };
     fn();
   }, []);
+
+  const fn = async () => {
+    const battle = await fetchBattle();
+    setBattleData(battle.data);
+  };
 
   const deleteBattle = async (id) => {
     const deletedBattle = await axios.get(`/api/categoryofgame/delete/${id}`);
     // add here the flash message.
     // / delete karne ke bad ham same page pe aate hai o deleted dekhne ke liye humko refresh karn a hota hai.
     if (deletedBattle.status == 200) {
-      navigate("/allbattle");
+      fn();
     }
   };
 

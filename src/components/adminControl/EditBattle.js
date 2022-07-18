@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import classes from "./AddBattle.module.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { battleContext } from "../context/battleContext";
 import { useParams, useNavigate } from "react-router-dom";
+import { spinnerContext } from "../context/spinnerContext";
 const EditBattle = () => {
+  const { setLoading } = useContext(spinnerContext);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [defaultCount, setCount] = useState("");
@@ -25,10 +25,9 @@ const EditBattle = () => {
     setPrice(getBattleById.data.pricetoenter);
     setCount(getBattleById.data.numberofPlayers);
     setOrder(getBattleById.data.order);
-
-    console.log(getBattleById, "mishra jee");
   };
   const submitHandler = async (event) => {
+    setLoading(true);
     event.preventDefault();
     const updateBattle = await axios.put(
       `/api/categoryofgame/edit/${params.id}`,
@@ -39,7 +38,10 @@ const EditBattle = () => {
         order: order,
       }
     );
-    console.log(updateBattle);
+    setLoading(false);
+    if (updateBattle.status == 200) {
+      navigate("/allbattle");
+    }
   };
 
   return (

@@ -21,6 +21,9 @@ import Waitingforcode from "./components/playgame/Waitingforcode";
 import GameExpired from "./components/playgame/GameExpired";
 import ImageUploader from "./components/aftergame/ImageUploader";
 import StarttheGame from "./components/playgame/StarttheGame";
+import SuperAdmin from "./components/superadmin/SuperAdmin";
+import AdminUserForGame from "./components/superadmin/AdminUserForGame";
+import AllAdminPlayer from "./components/superadmin/AllAdminPlayer";
 // import Home from "./components/layout/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
@@ -68,6 +71,17 @@ const App = () => {
                   exact
                   path="/imageuploader"
                   element={<ImageUploader />}
+                />
+                <Route exact path="/superadmin" element={<SuperAdmin />} />
+                <Route
+                  exact
+                  path="/superadmin/adminuserforgame"
+                  element={<AdminUserForGame />}
+                />
+                <Route
+                  exact
+                  path="/superadmin/alladminplayer"
+                  element={<AllAdminPlayer />}
                 />
               </Routes>
             </BattleProvider>

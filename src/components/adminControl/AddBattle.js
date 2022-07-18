@@ -1,11 +1,9 @@
 import React, { useRef } from "react";
 import axios from "axios";
 import classes from "./AddBattle.module.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { battleContext } from "../context/battleContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 const AddBattle = () => {
   const nameInputRef = useRef();
   const priceInputRef = useRef();
@@ -31,6 +29,7 @@ const AddBattle = () => {
   };
   return (
     <div className={classes.battle}>
+      <Link to="/allbattle">Back to all Battle</Link>
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name Of Battle</Form.Label>
