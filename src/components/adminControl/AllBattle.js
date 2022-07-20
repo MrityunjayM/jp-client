@@ -39,7 +39,7 @@ const AllBattle = () => {
       </thead>
       <tbody>
         {battleData.map((e, i) => (
-          <tr key={e._id}>
+          <tr key={e._id} onClick={(e) => console.log("balajee mishra", e)}>
             <td>{e.order}</td>
             <td>{e.name}</td>
             <td>{e.price}</td>
