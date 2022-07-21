@@ -13,7 +13,12 @@ export const AuthProvider = ({ children }) => {
   //for spinner purpose.
   let [user_log, setUserLog] = useState(null);
   const SignOut = async () => {
-    // sessionStorage.removeItem("Auth Token");
+    setLoading(true);
+    const signout = await axios.get("/api/user/logout");
+    if (signout.status == 200) {
+      alert("you are signed out successfully");
+      setLoading(false);
+    }
   };
 
   // for registeration

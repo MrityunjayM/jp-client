@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../context/authContext";
 const MainNavigation = () => {
+  const { SignOut } = useContext(authContext);
   return (
     <>
       <div>
@@ -9,6 +11,9 @@ const MainNavigation = () => {
         </Link>
         <Link style={{ margin: 10 }} to="login">
           LogIn
+        </Link>
+        <Link style={{ margin: 10 }} to="login" onClick={SignOut}>
+          Logout
         </Link>
         <Link style={{ margin: 10 }} to="addbattle">
           AddBattle

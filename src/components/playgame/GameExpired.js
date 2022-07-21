@@ -6,14 +6,14 @@ const GameExpired = () => {
   const location = useLocation();
   const { gameexpired, data } = location.state;
   useEffect(() => {
-    fn();
+    // fn();
   }, []);
-  const fn = async () => {
-    if (data) {
-      const removeHistory = await axios.post("/api/removehistory/", data);
-      console.log(removeHistory);
-    }
-  };
+  // const fn = async () => {
+  //   if (data) {
+  //     const removeHistory = await axios.post("/api/removehistory/", data);
+  //     console.log(removeHistory);
+  //   }
+  // };
   return (
     <>
       {gameexpired ? (

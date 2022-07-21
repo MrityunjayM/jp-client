@@ -6,7 +6,7 @@ const Waitingforcode = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { data } = location.state;
-  const [second, setSecond] = useState(20);
+  const [second, setSecond] = useState(80);
   const [roomCode, setRoomCode] = useState();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Waitingforcode = () => {
     let intervalId = setInterval(async () => {
       t = t + 1;
       setSecond(second - t);
-      if (t == 20) {
+      if (t == 80) {
         clearTimer();
       }
       const findingTheCode = await axios.get("/api/playgame/getroomcode");

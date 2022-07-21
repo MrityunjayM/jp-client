@@ -7,7 +7,7 @@ const GamePlayInput = () => {
   const location = useLocation();
   const { data } = location.state;
   const [roomCode, setRoomCode] = useState();
-  const [second, setSecond] = useState(20);
+  const [second, setSecond] = useState(80);
 
   const playthegame = async (e) => {
     e.preventDefault();
@@ -29,11 +29,10 @@ const GamePlayInput = () => {
     let intervalId = setInterval(() => {
       t = t + 1;
       setSecond(second - t);
-      if (t == 20 || information == 1) {
+      if (t == 80 || information == 1) {
         clearTimer();
       }
     }, 1000);
-
     const clearTimer = () => {
       clearInterval(intervalId);
       if (!roomCode) {
@@ -44,7 +43,6 @@ const GamePlayInput = () => {
           },
         });
       }
-
       // if they will enter the roomcode and submit that successfully....
       if (roomCode) {
         navigate("/startthegame", {
