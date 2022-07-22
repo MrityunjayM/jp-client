@@ -16,7 +16,12 @@ const GamePlayInput = () => {
       roomCode,
     });
     if (entryindatabase.status == 200) {
-      setTimer(1);
+      // setTimer(1);
+      navigate("/startthegame", {
+        state: {
+          gamestart: true,
+        },
+      });
     }
   };
 
@@ -24,15 +29,16 @@ const GamePlayInput = () => {
     setTimer();
   }, []);
 
-  const setTimer = (information) => {
+  const setTimer = () => {
     let t = 0;
     let intervalId = setInterval(() => {
       t = t + 1;
       setSecond(second - t);
-      if (t == 80 || information == 1) {
+      if (t == 80) {
         clearTimer();
       }
     }, 1000);
+
     const clearTimer = () => {
       clearInterval(intervalId);
       if (!roomCode) {
@@ -44,13 +50,13 @@ const GamePlayInput = () => {
         });
       }
       // if they will enter the roomcode and submit that successfully....
-      if (roomCode) {
-        navigate("/startthegame", {
-          state: {
-            gamestart: true,
-          },
-        });
-      }
+      // if (roomCode) {
+      //   navigate("/startthegame", {
+      //     state: {
+      //       gamestart: true,
+      //     },
+      //   });
+      // }
     };
   };
 

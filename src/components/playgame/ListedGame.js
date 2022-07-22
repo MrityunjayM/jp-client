@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import {
   Card,
   CardBody,
@@ -17,7 +17,6 @@ const ListedGame = () => {
   const { fetchBattle, battleData, setBattleData } = useContext(battleContext);
   const { setLoading, loading } = useContext(spinnerContext);
   const navigate = useNavigate();
-
   useEffect(() => {
     fn();
   }, []);

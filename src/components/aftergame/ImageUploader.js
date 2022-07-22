@@ -21,7 +21,6 @@ function ImageUploader() {
       alert(afterverification.data.message);
     }
     if (imageresult.status != 202) {
-      console.log(imageresult, "balajee");
       setLoading(false);
       alert(imageresult.data.message);
     }
