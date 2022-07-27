@@ -6,12 +6,10 @@ export const authContext = createContext();
 const { Provider } = authContext;
 
 export const AuthProvider = ({ children }) => {
-  // const [authToken, setAuthToken] = useState(null);
   const { loading, setLoading } = useContext(spinnerContext);
   const [isRevealPwd, setIsRevealPwd] = useState(false);
   const navigate = useNavigate();
   //for spinner purpose.
-  let [user_log, setUserLog] = useState(null);
   const SignOut = async () => {
     setLoading(true);
     const signout = await axios.get("/api/user/logout");
@@ -29,10 +27,10 @@ export const AuthProvider = ({ children }) => {
       passwordValue,
     });
     if (dataTosubmit.status == 200) {
+      localStorage.setItem("authtoken", dataTosubmit.data.token);
       setLoading(false);
       alert("Thanks for sign up");
     }
-    // sessionStorage.setItem("Auth Token", response._tokenResponse.refreshToken);
   };
   // for login
   const SignIn = async (phoneInput, passwordValue) => {
@@ -43,15 +41,26 @@ export const AuthProvider = ({ children }) => {
       passwordValue,
     });
     if (dataTosubmit.status == 200) {
-      setUserLog(dataTosubmit.data.user_log);
+      localStorage.setItem("authtoken", dataTosubmit.data.token);
       setLoading(false);
       alert("You are logged in");
     }
   };
-
+  // currentuser
+  const getCurrentUser = () => {
+    return localStorage.getItem("authtoken");
+  };
   return (
     <Provider
-      value={{ SignIn, SignOut, SignUp, loading, isRevealPwd, setIsRevealPwd }}
+      value={{
+        SignIn,
+        SignOut,
+        SignUp,
+        loading,
+        isRevealPwd,
+        setIsRevealPwd,
+        getCurrentUser,
+      }}
     >
       {children}
     </Provider>

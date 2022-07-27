@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { battleContext } from "../context/battleContext";
 import Table from "react-bootstrap/Table";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 const AllBattle = () => {
   const { fetchBattle, battleData, setBattleData } = useContext(battleContext);
-  const navigate = useNavigate();
-  //temprory solution.
-  //   const [battleDatas, setBattleDatas] = useState([]);
+
   useEffect(() => {
     fn();
   }, []);
