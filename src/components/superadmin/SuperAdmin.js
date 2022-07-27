@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 function SuperAdmin() {
   return (
     <div className="text-center mt-5">

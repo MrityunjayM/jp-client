@@ -20,7 +20,7 @@ const GiveCoinToUser = () => {
     if (!founduser) {
       const foundUser = await axios.post("/api/cointouser", { phoneNo });
       const { status } = foundUser;
-      if (status == 200) {
+      if (status === 200) {
         // console.log("balajee mishra");
         setToFoundUser(true);
       }
@@ -31,7 +31,7 @@ const GiveCoinToUser = () => {
       });
       const { status } = addCoin;
       // for successfully added
-      if (status == 200) navigate("/coinofuser", { state: { phoneNo } });
+      if (status === 200) navigate("/coinofuser", { state: { phoneNo } });
       // in case of failed to adding in database.
       else {
         setStatus(0);

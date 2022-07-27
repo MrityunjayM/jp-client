@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useLocation,useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 const GamePlayInput = () => {
+  const [roomCode, setRoomCode] = useState(null);
+  const [second, setSecond] = useState(80);
+
   const navigate = useNavigate();
   const location = useLocation();
   const { data } = location.state;
-  const [roomCode, setRoomCode] = useState();
-  const [second, setSecond] = useState(80);
 
   const playthegame = async (e) => {
     e.preventDefault();
@@ -15,8 +16,8 @@ const GamePlayInput = () => {
       data,
       roomCode,
     });
-    if (entryindatabase.status == 200) {
-      // setTimer(1);
+
+    if (entryindatabase.status === 200) {
       navigate("/startthegame", {
         state: {
           gamestart: true,
@@ -25,16 +26,12 @@ const GamePlayInput = () => {
     }
   };
 
-  useEffect(() => {
-    setTimer();
-  }, []);
-
-  const setTimer = () => {
+  const setTimer = useCallback(() => {
     let t = 0;
     let intervalId = setInterval(() => {
       t = t + 1;
       setSecond(second - t);
-      if (t == 80) {
+      if (t === 80) {
         clearTimer();
       }
     }, 1000);
@@ -58,7 +55,12 @@ const GamePlayInput = () => {
       //   });
       // }
     };
-  };
+  },[second,roomCode]);
+
+  useEffect(() => {
+    setTimer();
+  }, []);
+
 
   return (
     <>

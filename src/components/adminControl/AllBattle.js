@@ -1,8 +1,10 @@
 import React, { useContext, useEffect , useCallback} from "react";
-import { battleContext } from "../context/battleContext";
-import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
+import Table from "react-bootstrap/Table";
 import axios from "axios";
+
+import { battleContext } from "../context/battleContext";
+
 const AllBattle = () => {
   const { fetchBattle, battleData, setBattleData } = useContext(battleContext);
 
@@ -23,7 +25,7 @@ const AllBattle = () => {
     const deletedBattle = await axios.get(`/api/categoryofgame/delete/${id}`)
     // add here the flash message.
     // / delete karne ke bad ham same page pe aate hai o deleted dekhne ke liye humko refresh karn a hota hai.
-    if (deletedBattle.status == 200) {
+    if (deletedBattle.status === 200) {
       fn()
     }
   }

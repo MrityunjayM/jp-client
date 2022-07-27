@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useParams, useNavigate } from "react-router-dom";
 import { spinnerContext } from "../context/spinnerContext";
+
 const EditBattle = () => {
   const { setLoading } = useContext(spinnerContext);
   const [name, setName] = useState("");
@@ -17,6 +18,7 @@ const EditBattle = () => {
   useEffect(() => {
     getDataFirst();
   }, []);
+
   const getDataFirst = async () => {
     const getBattleById = await axios.get(
       `/api/categoryofgame/edit/${params.id}`
@@ -26,6 +28,7 @@ const EditBattle = () => {
     setCount(getBattleById.data.numberofPlayers);
     setOrder(getBattleById.data.order);
   };
+  
   const submitHandler = async (event) => {
     setLoading(true);
     event.preventDefault();
@@ -39,7 +42,7 @@ const EditBattle = () => {
       }
     );
     setLoading(false);
-    if (updateBattle.status == 200) {
+    if (updateBattle.status === 200) {
       navigate("/allbattle");
     }
   };

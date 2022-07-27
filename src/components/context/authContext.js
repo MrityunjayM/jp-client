@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   //for spinner purpose.
   const SignOut = async () => {
+    console.log("Logging out...")
     setLoading(true);
     const signout = await axios.get("/api/user/logout");
     if (signout.status == 200) {

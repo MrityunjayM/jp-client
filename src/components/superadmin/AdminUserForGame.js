@@ -3,15 +3,16 @@ import axios from "axios";
 import { spinnerContext } from "../context/spinnerContext";
 
 function AdminUserForGame() {
-  const { setLoading } = useContext(spinnerContext);
   const [phoneInput, setContact] = useState();
+  const { setLoading } = useContext(spinnerContext);
+
   const addAdminforPlaying = async (e) => {
     setLoading(true);
     e.preventDefault();
     const adduser = await axios.post("/api/user/adminplayerregister", {
       phoneInput,
     });
-    if (adduser.status == 200) {
+    if (adduser.status === 200) {
       setLoading(false);
       alert("user created successfully");
     }

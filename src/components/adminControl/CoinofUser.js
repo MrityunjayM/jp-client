@@ -6,9 +6,11 @@ const Coinofuser = () => {
   const location = useLocation();
   const { phoneNo } = location.state;
   const [userDetail, setUserDetail] = useState([]);
+  
   useEffect(() => {
     coinUpdating();
   }, []);
+  
   const coinUpdating = async () => {
     const coinupdateforuser = await axios.post("/api/cointouser/all", {
       phoneNo,
@@ -29,7 +31,7 @@ const Coinofuser = () => {
       </thead>
       <tbody>
         {userDetail.map((e, i) =>
-          i == 0 ? (
+          !i ? (
             <tr style={{ color: "red" }}>
               <th scope="row">{i + 1}</th>
               <td>{e.user.phoneNo}</td>

@@ -25,7 +25,7 @@ const AddBattle = () => {
       orderInput,
     })
     // now handle this as you wantt
-    if (uploadData.status == 200) {
+    if (uploadData.status === 200) {
       navigate("/allbattle")
     }
   }

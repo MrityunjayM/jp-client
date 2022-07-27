@@ -1,4 +1,6 @@
-import React, { useEffect, useContext, useState, useCallback } from "react"
+import React, { useEffect, useContext, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import {
   Card,
   CardBody,
@@ -7,10 +9,10 @@ import {
   CardSubtitle,
   Button,
 } from "reactstrap"
+
 import { battleContext } from "../context/battleContext"
 import { spinnerContext } from "../context/spinnerContext"
-import { useNavigate } from "react-router-dom"
-import axios from "axios"
+
 import classes from "./Game.module.css"
 
 const ListedGame = () => {
@@ -21,11 +23,9 @@ const ListedGame = () => {
   const fn = useCallback(async () => {
     const fetchedData = await fetchBattle()
     setBattleData(fetchedData.data)
-  }, [])
+  }, [fetchBattle])
 
-  useEffect(() => {
-    fn()
-  }, [fn])
+  useEffect(() => { fn() }, [fn])
 
   const handlingPlayer = async (
     name,
@@ -93,7 +93,7 @@ const ListedGame = () => {
               bulk of the card's content.
             </CardText>
             <Button
-              onClick={() => {
+              onClick={(e) => {
                 handlingPlayer(
                   e.name,
                   e.pricetoenter,
@@ -110,4 +110,5 @@ const ListedGame = () => {
     </div>
   )
 }
+
 export default ListedGame

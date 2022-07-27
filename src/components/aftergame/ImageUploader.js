@@ -5,6 +5,7 @@ import { spinnerContext } from "../context/spinnerContext";
 function ImageUploader() {
   const [image, setImage] = useState("");
   const { setLoading } = useContext(spinnerContext);
+  
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -14,13 +15,13 @@ function ImageUploader() {
       "/api/playgame/imageuploader",
       formData
     );
-    if (imageresult.status == 202) {
+    if (imageresult.status === 202) {
       const afterverification = await axios.get("/api/playgame/afterverify");
       setLoading(false);
       alert("matched");
       alert(afterverification.data.message);
     }
-    if (imageresult.status != 202) {
+    if (imageresult.status !== 202) {
       setLoading(false);
       alert(imageresult.data.message);
     }

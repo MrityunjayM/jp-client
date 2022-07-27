@@ -4,8 +4,9 @@ import { Table } from "reactstrap";
 import { spinnerContext } from "../context/spinnerContext";
 
 function AllAdminPlayer() {
-  const { setLoading } = useContext(spinnerContext);
   const [data, setData] = useState([]);
+  const { setLoading } = useContext(spinnerContext);
+
   useEffect(() => {
     fn();
   }, []);
@@ -23,7 +24,7 @@ function AllAdminPlayer() {
     // add here the flash message.
     // / delete karne ke bad ham same page pe aate hai o deleted dekhne ke liye humko refresh karn a hota hai.
     setLoading(false);
-    if (deletedUser.status == 200) {
+    if (deletedUser.status === 200) {
       fn();
     }
   };

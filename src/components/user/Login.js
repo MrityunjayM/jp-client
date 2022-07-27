@@ -10,6 +10,7 @@ const LogIn = () => {
   const { SignIn, isRevealPwd, setIsRevealPwd } = useContext(authContext);
   const phoneInputRef = useRef();
   const password = useRef();
+  
   async function submitHandler(event) {
     try {
       event.preventDefault();

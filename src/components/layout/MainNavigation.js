@@ -55,7 +55,12 @@ const MainNavigation = () => {
         </NavLink>
 
         <div>
-          <Button color="light" className={classes["btn-menu"]} id={classes["btn-transparent"]} onClick={() => setCollapsed(true)}>
+          <Button 
+            color="light" 
+            className={classes["btn-menu"]} 
+            id={classes["btn-transparent"]} 
+            onClick={() => setCollapsed(true)}
+          >
             <FaBars />
           </Button>
           <Offcanvas
@@ -63,6 +68,7 @@ const MainNavigation = () => {
             fade={true}
             scrollable
             isOpen={collapsed}
+            unmountOnClose={true}
             toggle={() => setCollapsed(false)}
           >
             <OffcanvasHeader toggle={() => setCollapsed(!true)}>
