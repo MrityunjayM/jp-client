@@ -1,11 +1,14 @@
-import React, { useCallback, useContext, useEffect, useState } from "react"
-import { battleContext } from "../context/battleContext"
-import Table from "react-bootstrap/Table"
-import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
+import React, { useContext, useEffect , useCallback} from "react";
+import { battleContext } from "../context/battleContext";
+import Table from "react-bootstrap/Table";
+import { Link } from "react-router-dom";
+import axios from "axios";
 const AllBattle = () => {
-  const { fetchBattle, battleData, setBattleData } = useContext(battleContext)
-  const navigate = useNavigate()
+  const { fetchBattle, battleData, setBattleData } = useContext(battleContext);
+
+  useEffect(() => {
+    fn();
+  }, []);
 
   const fn = useCallback(async () => {
     const battle = await fetchBattle()

@@ -1,34 +1,36 @@
-import React from "react"
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
-import { AuthProvider } from "./components/context/authContext"
-import { BattleProvider } from "./components/context/battleContext"
-import { SpinnerProvider } from "./components/context/spinnerContext"
-import { TimerProvider } from "./components/context/timerContext"
-import GameProvider from "./components/context/gameContext"
-import MainNavigation from "./components/layout/MainNavigation"
-import SignUp from "./components/user/Signup"
-import LogIn from "./components/user/Login"
-import Spinner from "./components/loader/Spinner"
-import Message from "./components/flashMessage/FlashMessage"
-import AddBattle from "./components/adminControl/AddBattle"
-import AllBattle from "./components/adminControl/AllBattle"
-import EditBattle from "./components/adminControl/EditBattle"
-import GiveCoinToUser from "./components/adminControl/GiveCointouser"
-import Coinofuser from "./components/adminControl/CoinofUser"
-import ListedGame from "./components/playgame/ListedGame"
-import GamePlayInput from "./components/playgame/GamePlayInput"
-import Waitingforcode from "./components/playgame/Waitingforcode"
-import GameExpired from "./components/playgame/GameExpired"
-import ImageUploader from "./components/aftergame/ImageUploader"
-import StarttheGame from "./components/playgame/StarttheGame"
-import SuperAdmin from "./components/superadmin/SuperAdmin"
-import AdminUserForGame from "./components/superadmin/AdminUserForGame"
-import AllAdminPlayer from "./components/superadmin/AllAdminPlayer"
-// import Home from "./components/layout/Home";
-
-import "bootstrap/dist/css/bootstrap.min.css"
-
+import React, { useEffect } from "react";
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import OneSignal from "react-onesignal";
+import { AuthProvider } from "./components/context/authContext";
+import { BattleProvider } from "./components/context/battleContext";
+import { SpinnerProvider } from "./components/context/spinnerContext";
+import { TimerProvider } from "./components/context/timerContext";
+import MainNavigation from "./components/layout/MainNavigation";
+import SignUp from "./components/user/Signup";
+import LogIn from "./components/user/Login";
+import Spinner from "./components/loader/Spinner";
+import AddBattle from "./components/adminControl/AddBattle";
+import AllBattle from "./components/adminControl/AllBattle";
+import EditBattle from "./components/adminControl/EditBattle";
+import GiveCoinToUser from "./components/adminControl/GiveCointouser";
+import Coinofuser from "./components/adminControl/CoinofUser";
+import ListedGame from "./components/playgame/ListedGame";
+import GamePlayInput from "./components/playgame/GamePlayInput";
+import Waitingforcode from "./components/playgame/Waitingforcode";
+import GameExpired from "./components/playgame/GameExpired";
+import ImageUploader from "./components/aftergame/ImageUploader";
+import StarttheGame from "./components/playgame/StarttheGame";
+import SuperAdmin from "./components/superadmin/SuperAdmin";
+import AdminUserForGame from "./components/superadmin/AdminUserForGame";
+import AllAdminPlayer from "./components/superadmin/AllAdminPlayer";
+import Home from "./components/user/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
+  useEffect(() => {
+    OneSignal.init({
+      appId: "5f4f8f0b-19aa-4ef4-9113-319e4ba7e91a",
+    });
+  }, []);
   return (
     <Router>
       <SpinnerProvider>
@@ -40,10 +42,11 @@ const App = () => {
             <Spinner />
 
             {/* Routing component */}
+            {/* {["/", "/home"]} */}
             <BattleProvider>
               <Routes>
                 <Route exact path="/signup" element={<SignUp />} />
-                {/* <Route exact path="/home" element={<Home />} /> */}
+                <Route exact path="/home" element={<Home />} />
                 <Route exact path="/login" element={<LogIn />} />
                 // battle part
                 <Route exact path="/addbattle" element={<AddBattle />} />
