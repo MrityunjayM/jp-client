@@ -1,30 +1,29 @@
-import React, { useContext, useEffect, useState } from "react";
-import { battleContext } from "../context/battleContext";
-import Table from "react-bootstrap/Table";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useCallback, useContext, useEffect, useState } from "react"
+import { battleContext } from "../context/battleContext"
+import Table from "react-bootstrap/Table"
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 const AllBattle = () => {
-  const { fetchBattle, battleData, setBattleData } = useContext(battleContext);
-  const navigate = useNavigate();
-  //temprory solution.
-  //   const [battleDatas, setBattleDatas] = useState([]);
-  useEffect(() => {
-    fn();
-  }, []);
+  const { fetchBattle, battleData, setBattleData } = useContext(battleContext)
+  const navigate = useNavigate()
 
-  const fn = async () => {
-    const battle = await fetchBattle();
-    setBattleData(battle.data);
-  };
+  const fn = useCallback(async () => {
+    const battle = await fetchBattle()
+    setBattleData(battle.data)
+  }, [])
+
+  useEffect(() => {
+    fn()
+  }, [fn])
 
   const deleteBattle = async (id) => {
-    const deletedBattle = await axios.get(`/api/categoryofgame/delete/${id}`);
+    const deletedBattle = await axios.get(`/api/categoryofgame/delete/${id}`)
     // add here the flash message.
     // / delete karne ke bad ham same page pe aate hai o deleted dekhne ke liye humko refresh karn a hota hai.
     if (deletedBattle.status == 200) {
-      fn();
+      fn()
     }
-  };
+  }
 
   return (
     <Table striped bordered hover variant="dark">
@@ -45,13 +44,16 @@ const AllBattle = () => {
             <td>{e.price}</td>
             <td>{e.numberofPlayers}</td>
             <td>
-              <Link style={{ margin: 10 }} to={`/edit/${e._id}`}>
+              <Link
+                style={{ margin: 10, display: "inline" }}
+                to={`/edit/${e._id}`}
+              >
                 Edit
               </Link>
-              <hr />
               <button
+                className="d-inline"
                 onClick={() => {
-                  deleteBattle(e._id);
+                  deleteBattle(e._id)
                 }}
               >
                 Delete
@@ -61,6 +63,6 @@ const AllBattle = () => {
         ))}
       </tbody>
     </Table>
-  );
-};
-export default AllBattle;
+  )
+}
+export default AllBattle

@@ -1,32 +1,35 @@
-import React, { useRef } from "react";
-import axios from "axios";
-import classes from "./AddBattle.module.css";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useRef } from "react"
+import axios from "axios"
+import classes from "./AddBattle.module.css"
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
+import { useNavigate, Link } from "react-router-dom"
+
 const AddBattle = () => {
-  const nameInputRef = useRef();
-  const priceInputRef = useRef();
-  const defaultPlayerRef = useRef();
-  const orderRef = useRef();
-  const navigate = useNavigate();
+  const nameInputRef = useRef()
+  const priceInputRef = useRef()
+  const defaultPlayerRef = useRef()
+  const orderRef = useRef()
+  const navigate = useNavigate()
+
   const submitHandler = async (event) => {
-    event.preventDefault();
-    const nameInput = nameInputRef.current.value;
-    const priceInput = priceInputRef.current.value;
-    const defaultInput = defaultPlayerRef.current.value;
-    const orderInput = orderRef.current.value;
+    event.preventDefault()
+    const nameInput = nameInputRef.current.value
+    const priceInput = priceInputRef.current.value
+    const defaultInput = defaultPlayerRef.current.value
+    const orderInput = orderRef.current.value
     const uploadData = await axios.post("/api/categoryofgame/add", {
       nameInput,
       priceInput,
       defaultInput,
       orderInput,
-    });
+    })
     // now handle this as you wantt
     if (uploadData.status == 200) {
-      navigate("/allbattle");
+      navigate("/allbattle")
     }
-  };
+  }
+
   return (
     <div className={classes.battle}>
       <Link to="/allbattle">Back to all Battle</Link>
@@ -68,7 +71,7 @@ const AddBattle = () => {
         </Button>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default AddBattle;
+export default AddBattle

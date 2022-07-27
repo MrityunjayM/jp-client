@@ -1,41 +1,106 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { authContext } from "../context/authContext";
+import React, { useContext } from "react"
+import { Link } from "react-router-dom"
+import { authContext } from "../context/authContext"
 const MainNavigation = () => {
-  const { SignOut } = useContext(authContext);
+  const { SignOut } = useContext(authContext)
   return (
-    <>
-      <div>
-        <Link style={{ margin: 10 }} to="signup">
+    <header className="container-fluid mb-3 bg-success py-3">
+      <nav className="container">
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="signup"
+        >
           Sign-up
         </Link>
-        <Link style={{ margin: 10 }} to="login">
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="login"
+        >
           LogIn
         </Link>
-        <Link style={{ margin: 10 }} to="login" onClick={SignOut}>
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="login"
+          onClick={SignOut}
+        >
           Logout
         </Link>
-        <Link style={{ margin: 10 }} to="addbattle">
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="addbattle"
+        >
           AddBattle
         </Link>
         <Link style={{ display: "none" }} to="allbattle">
           AllBattle
         </Link>
-        <Link style={{ margin: 10 }} to="givecointouser">
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="givecointouser"
+        >
           GiveCoinToUser
         </Link>
-        <Link style={{ margin: 10 }} to="listedgame">
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="listedgame"
+        >
           ListedGame
         </Link>
-        <Link style={{ margin: 10 }} to="imageuploader">
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="imageuploader"
+        >
           Upload the image
         </Link>
-        <Link style={{ margin: 10 }} to="superadmin">
+        <Link
+          style={{
+            margin: "10px",
+            color: "#000",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+          to="superadmin"
+        >
           superAdmin
         </Link>
-      </div>
-    </>
-  );
-};
+      </nav>
+    </header>
+  )
+}
 
-export default MainNavigation;
+export default MainNavigation
