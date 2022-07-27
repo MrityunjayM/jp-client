@@ -1,73 +1,82 @@
 import React, { useContext, useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { FaBars } from 'react-icons/fa'
+
 import { authContext } from "../context/authContext";
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
+  Offcanvas, OffcanvasHeader, OffcanvasBody, Button
 } from "reactstrap";
 import classes from "./MainNavigation.module.css";
-import { Link } from "react-router-dom";
+
+import routes from './routes'
+
 const MainNavigation = () => {
-  const { SignOut, getCurrentUser } = useContext(authContext);
-  const [collapsed, setCollapsed] = useState(true);
-  const [currentUser, setCurrentUser] = useState(undefined);
-  const toggleNavbar = () => setCollapsed(!collapsed);
+  const { SignOut, getCurrentUser, user: userInfo } = useContext(authContext);
+  const [collapsed, setCollapsed] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const user = getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
+    const token = getCurrentUser();
+    if (token) {
+      setCurrentUser(token);
     }
   }, []);
 
+  const navigationRoutes = routes.map(({route, text}, index) => { 
+    if(currentUser && (route === '/signup' || route === '/login')) return
+    if(!currentUser && (route === '/logout')) return
+    if(currentUser && (route === '/logout')) {
+      return <NavItem key={index}>
+      <NavLink 
+        to={route} 
+        className={({isActive}) => isActive? "nav-link active":"nav-link"} 
+        onClick={() => {setCollapsed(!true); SignOut()}}>
+        {text}
+      </NavLink>
+    </NavItem>
+    }
+
+    return (<NavItem key={index}>
+      <NavLink 
+        to={route} 
+        className={({isActive})=> isActive? "nav-link active":"nav-link"} 
+        onClick={() => setCollapsed(!true)}>{text}</NavLink>
+    </NavItem>)
+  })
+  console.log(userInfo);
   return (
     <div className={classes.navigation}>
       <Navbar color="faded" light>
-        <NavbarBrand href="/" className="me-auto">
+        <NavLink to="/" className="me-auto navbar-brand">
           Mahi Ludo
-        </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="me-2" />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
-            {!currentUser && (
-              <>
-                <NavItem>
-                  <NavLink href="/signup">Sign-up</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/login">LogIn</NavLink>
-                </NavItem>
-              </>
-            )}
-            <NavItem>
-              <NavLink onClick={SignOut}>Logout</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/addbattle">Add Battle</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/allbattle">All Battle</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/givecointouser">Give coin to user</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/listedgame">Listed Game</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/imageuploader">upload the image</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/superadmin">super admin</NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
+        </NavLink>
+
+        <div>
+          <Button color="light" className={classes["btn-menu"]} id={classes["btn-transparent"]} onClick={() => setCollapsed(true)}>
+            <FaBars />
+          </Button>
+          <Offcanvas
+            direction="start"
+            fade={true}
+            scrollable
+            isOpen={collapsed}
+            toggle={() => setCollapsed(false)}
+          >
+            <OffcanvasHeader toggle={() => setCollapsed(!true)}>
+              Mahi Ludo
+            </OffcanvasHeader>
+            <OffcanvasBody>
+            <Nav className="flex-column">{navigationRoutes}</Nav>
+            </OffcanvasBody>
+          </Offcanvas>
+        </div>
       </Navbar>
     </div>
   );
 };
+
+
 export default MainNavigation;

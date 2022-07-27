@@ -1,3 +1,19 @@
 .navigation{
    background-color: rgb(255, 84, 84);
 }
+
+.btn-menu{
+   border: none !important;
+   border-radius: 0 !important;
+}
+
+#btn-transparent {
+background-color: transparent !important;
+}
+
+#btn-transparent:active,
+#btn-transparent:hover,
+#btn-transparent:focus{
+   outline: none !important;
+   box-shadow: none !important;
+}

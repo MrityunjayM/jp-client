@@ -1,19 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   font-family: 'Open Sans', sans-serif;
-  width: 50vw;
-  min-width: 480px;
+  width: 100%;
+  height: 100vh !important;
+  max-width: 460px !important;
   margin: auto;
   
 }
+
 .appclass{
-  background-color: #4fff8c;
-  min-height: 600px !important;
+  background-color: #e1daff;
+  min-height: 100vh !important;
 }
 
 h1 {
@@ -24,4 +28,30 @@ h1 {
 h2 {
   font-size: 1.5rem;
   color: #2c292b;
+}
+
+/* Canvas styling for positioning... */
+.offcanvas-header > .offcanvas-title{
+  padding: .5rem 1rem !important;
+}
+
+.offcanvas-header,
+.offcanvas-body{
+  padding: 0 1rem !important;
+}
+
+button.btn-close{
+  margin: 10px !important;
+}
+
+.offcanvas.show {
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.offcanvas-start {
+  width: 100%;
+  max-width: 460px;
+  border-right: 1px solid rgba(0,0,0,.2);
+  transform: translateX(-100%);
 }

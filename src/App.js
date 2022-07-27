@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import OneSignal from "react-onesignal";
+import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./components/context/authContext";
 import { BattleProvider } from "./components/context/battleContext";
 import { SpinnerProvider } from "./components/context/spinnerContext";
 import { TimerProvider } from "./components/context/timerContext";
+
 import MainNavigation from "./components/layout/MainNavigation";
 import SignUp from "./components/user/Signup";
 import LogIn from "./components/user/Login";
@@ -24,15 +25,19 @@ import SuperAdmin from "./components/superadmin/SuperAdmin";
 import AdminUserForGame from "./components/superadmin/AdminUserForGame";
 import AllAdminPlayer from "./components/superadmin/AllAdminPlayer";
 import Home from "./components/user/Home";
+
 import "bootstrap/dist/css/bootstrap.min.css";
+
+
 const App = () => {
+  
   useEffect(() => {
     OneSignal.init({
       appId: "5f4f8f0b-19aa-4ef4-9113-319e4ba7e91a",
     });
   }, []);
+
   return (
-    <Router>
       <SpinnerProvider>
         <AuthProvider>
           <TimerProvider>
@@ -45,10 +50,11 @@ const App = () => {
             {/* {["/", "/home"]} */}
             <BattleProvider>
               <Routes>
-                <Route exact path="/signup" element={<SignUp />} />
+                <Route exact path="/" element={<Home />} />
                 <Route exact path="/home" element={<Home />} />
+                <Route exact path="/signup" element={<SignUp />} />
                 <Route exact path="/login" element={<LogIn />} />
-                // battle part
+                
                 <Route exact path="/addbattle" element={<AddBattle />} />
                 <Route exact path="/allbattle" element={<AllBattle />} />
                 <Route exact path="/edit/:id" element={<EditBattle />} />
@@ -93,7 +99,6 @@ const App = () => {
           </TimerProvider>
         </AuthProvider>
       </SpinnerProvider>
-    </Router>
   )
 }
 export default App

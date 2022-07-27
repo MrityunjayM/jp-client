@@ -45,8 +45,8 @@ const LogIn = () => {
             onClick={() => setIsRevealPwd((prevState) => !prevState)}
           />
         </div>
-        <div className={classes.form_control}>
-          <button type="submit">Submit</button>
+        <div style={{padding: 0}}>
+        <button type="submit" className={classes["btn-signup"]}>Submit</button>
         </div>
       </form>
     </div>
