@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars } from 'react-icons/fa'
 
@@ -7,36 +7,34 @@ import {
   Navbar,
   Nav,
   NavItem,
-  Offcanvas, OffcanvasHeader, OffcanvasBody, Button
+  Offcanvas, OffcanvasHeader, OffcanvasBody, Button, Badge
 } from "reactstrap";
 import classes from "./MainNavigation.module.css";
 
 import routes from './routes'
 
 const MainNavigation = () => {
-  const { SignOut, getCurrentUser, user: userInfo } = useContext(authContext);
+  const { SignOut, user, token } = useContext(authContext);
   const [collapsed, setCollapsed] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
-    const token = getCurrentUser();
-    if (token) {
-      setCurrentUser(token);
-    }
-  }, []);
+  const handleLogout = useCallback(() => {
+    SignOut()
+    setCollapsed(false)
+    return 0
+  },[])
 
-  const navigationRoutes = routes.map(({route, text}, index) => { 
-    if(currentUser && (route === '/signup' || route === '/login')) return
-    if(!currentUser && (route === '/logout')) return
-    if(currentUser && (route === '/logout')) {
+  const navigationRoutes = routes.map(({route, text}, index) => {
+    if(token && (route === '/signup' || route === '/login')) return
+    if(!token && (route === '/logout')) return
+    if(token && (route === '/logout')) {
       return <NavItem key={index}>
-      <NavLink 
-        to={route} 
-        className={({isActive}) => isActive? "nav-link active":"nav-link"} 
-        onClick={() => {setCollapsed(!true); SignOut()}}>
-        {text}
-      </NavLink>
-    </NavItem>
+              <NavLink
+                to="#logout"
+                className="nav-link"
+                onClick={handleLogout}>
+                {text}
+              </NavLink>
+            </NavItem>
     }
 
     return (<NavItem key={index}>
@@ -46,7 +44,6 @@ const MainNavigation = () => {
         onClick={() => setCollapsed(!true)}>{text}</NavLink>
     </NavItem>)
   })
-  console.log(userInfo);
   return (
     <div className={classes.navigation}>
       <Navbar color="faded" light>
@@ -64,7 +61,7 @@ const MainNavigation = () => {
             <FaBars />
           </Button>
           <Offcanvas
-            direction="start"
+            direction={"start"}
             fade={true}
             scrollable
             isOpen={collapsed}
@@ -75,6 +72,9 @@ const MainNavigation = () => {
               Mahi Ludo
             </OffcanvasHeader>
             <OffcanvasBody>
+            {user && <Badge color="primary" className="ms-3">
+              {user}
+            </Badge>}
             <Nav className="flex-column">{navigationRoutes}</Nav>
             </OffcanvasBody>
           </Offcanvas>
@@ -84,5 +84,4 @@ const MainNavigation = () => {
   );
 };
 
-
-export default MainNavigation;
+export default React.memo(MainNavigation);

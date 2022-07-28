@@ -1,5 +1,4 @@
 import React from "react";
-import { render } from "react-dom";
 // import FlashMessage from "react-flash-message";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";

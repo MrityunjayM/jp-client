@@ -55,7 +55,7 @@ const GiveCoinToUser = () => {
           placeholder="Enter the phone no of User"
           onChange={(e) => setContact(e.target.value)}
         />
-        {founduser ? (
+        {founduser && (
           <div>
             <Message message="user found successfully" success={true} />
             <label>Give the coin to user</label>
@@ -66,10 +66,9 @@ const GiveCoinToUser = () => {
             />
             <button type="submit">Add coin</button>
           </div>
-        ) : (
-          ""
         )}
-        {!founduser ? <button type="submit">search user</button> : ""}
+        
+        {!founduser && <button type="submit">search user</button>}
       </form>
     </>
   );

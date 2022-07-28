@@ -44,6 +44,7 @@ const LogIn = () => {
             title={isRevealPwd ? "Hide password" : "Show password"}
             src={isRevealPwd ? hidePwdImg : showPwdImg}
             onClick={() => setIsRevealPwd((prevState) => !prevState)}
+            alt={isRevealPwd ? "Hide Password":"Show Password"}
           />
         </div>
         <div style={{padding: 0}}>

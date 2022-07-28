@@ -43,7 +43,7 @@ const ListedGame = () => {
         waitingPlayer,
       })
       console.log(loading, "bala")
-      if ((checkingwait.status == 202 && checkingwait.data) || ++x == 45) {
+      if ((checkingwait.status === 202 && checkingwait.data) || ++x === 45) {
         clearTimer(x, checkingwait)
       }
     }, 1000)
@@ -52,7 +52,7 @@ const ListedGame = () => {
       clearInterval(timer)
       setLoading(false)
       // this is for admin purpose...
-      if (x == 45) {
+      if (x === 45) {
         const giveCommandtoadmin = await axios.post(
           "/api/playgame/giveittoadmin",
           {
@@ -65,13 +65,13 @@ const ListedGame = () => {
         alert("command of this section will goes to adminnn")
       }
 
-      if (checkingwait.data.user == "opponentuser") {
+      if (checkingwait.data.user === "opponentuser") {
         navigate("/gameplayinput", {
           state: { data: checkingwait.data },
         })
       }
 
-      if (checkingwait.data.user == "user") {
+      if (checkingwait.data.user === "user") {
         navigate("/waitingforcode", {
           state: { data: checkingwait.data },
         })
@@ -81,8 +81,8 @@ const ListedGame = () => {
   // <Spinner />
   return (
     <div>
-      {battleData.map((e) => (
-        <Card className={classes.styled_card}>
+      {battleData.map((e,key) => (
+        <Card className={classes.styled_card} key={key}>
           <CardBody>
             <CardTitle tag="h5">{e.name}</CardTitle>
             <CardSubtitle className="mb-2 text-muted" tag="h6">

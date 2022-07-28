@@ -18,11 +18,11 @@ const Waitingforcode = () => {
     let intervalId = setInterval(async () => {
       t = t + 1;
       setSecond(second - t);
-      if (t == 80) {
+      if (t === 80) {
         clearTimer();
       }
       const findingTheCode = await axios.get("/api/playgame/getroomcode");
-      if (findingTheCode.status == 202) {
+      if (findingTheCode.status === 202) {
         // findingTheCode.data.roomCode
         setRoomCode("12345");
         clearTimer(findingTheCode.status);
@@ -39,9 +39,7 @@ const Waitingforcode = () => {
           },
         });
       }
-      if (status == 202) {
-        navigate("/startthegame");
-      }
+      if (status === 202) navigate("/startthegame");
     };
   };
 
