@@ -1,26 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import "./index.css";
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { BrowserRouter } from "react-router-dom"
+import App from "./App"
+import "./index.css"
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root"))
 
 root.render(
   <BrowserRouter>
-  <div className="appclass">
+    <div className="appclass">
       <App />
-  </div>
+    </div>
   </BrowserRouter>
-);
+)
 
 // root.render(
-//   <div className="appclass">
-//     <React.StrictMode>
-//       <App />
-//     </React.StrictMode>
-//   </div>
-// );
+//   <React.StrictMode>
+//     <BrowserRouter>
+//       <div className="appclass">
+//         <App />
+//       </div>
+//     </BrowserRouter>
+//   </React.StrictMode>
+// )
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -71,7 +71,6 @@ export const AuthProvider = ({ children }) => {
     navigate("/listedgame")
   };
   
-
   return (
     <Provider
       value={{
