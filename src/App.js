@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
+import { Route, Routes, Navigate } from "react-router-dom"
 import OneSignal from "react-onesignal"
-import { Route, Routes } from "react-router-dom"
+// Contexts...
 import { AuthProvider } from "./components/context/authContext"
 import { BattleProvider } from "./components/context/battleContext"
 import { SpinnerProvider } from "./components/context/spinnerContext"
 import { TimerProvider } from "./components/context/timerContext"
-
+// Components...
 import MainNavigation from "./components/layout/MainNavigation"
 import SignUp from "./components/user/Signup"
 import LogIn from "./components/user/Login"
@@ -27,9 +28,10 @@ import AllAdminPlayer from "./components/superadmin/AllAdminPlayer"
 import Home from "./components/user/Home"
 
 import "bootstrap/dist/css/bootstrap.min.css"
+import { Container } from "reactstrap"
+import AuthenticatedRoutes from "./components/AuthenticatedRoutes"
 
 const App = () => {
-
   useEffect(() => {
     OneSignal.init({
       appId: process.env.REACT_APP_ONE_SIGNAL_ID || "",
@@ -46,44 +48,59 @@ const App = () => {
           {/* Routing component */}
           {/* {["/", "/home"]} */}
           <BattleProvider>
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/home" element={<Home />} />
-              <Route exact path="/signup" element={<SignUp />} />
-              <Route exact path="/login" element={<LogIn />} />
-
-              <Route exact path="/addbattle" element={<AddBattle />} />
-              <Route exact path="/allbattle" element={<AllBattle />} />
-              <Route exact path="/edit/:id" element={<EditBattle />} />
-              {/* // for adding coin to user  */}
-              <Route
-                exact
-                path="/givecointouser"
-                element={<GiveCoinToUser />}
-              />
-              <Route exact path="/coinofuser" element={<Coinofuser />} />
-              <Route exact path="/listedgame" element={<ListedGame />} />
-              <Route exact path="/gameplayinput" element={<GamePlayInput />} />
-              <Route
-                exact
-                path="/waitingforcode"
-                element={<Waitingforcode />}
-              />
-              <Route exact path="/gameexpired" element={<GameExpired />} />
-              <Route exact path="/startthegame" element={<StarttheGame />} />
-              <Route exact path="/imageuploader" element={<ImageUploader />} />
-              <Route exact path="/superadmin" element={<SuperAdmin />} />
-              <Route
-                exact
-                path="/superadmin/adminuserforgame"
-                element={<AdminUserForGame />}
-              />
-              <Route
-                exact
-                path="/superadmin/alladminplayer"
-                element={<AllAdminPlayer />}
-              />
-            </Routes>
+            <Container className="d-flex flex-column justify-content-center mt-3">
+              <Routes>
+                <Route exact path="/" element={<Navigate to={"/home"} />} />
+                <Route exact path="/home" element={<Home />} />
+                <Route exact path="/signup" element={<SignUp />} />
+                <Route exact path="/login" element={<LogIn />} />
+                <Route element={<AuthenticatedRoutes />}>
+                  <Route exact path="/addbattle" element={<AddBattle />} />
+                  <Route exact path="/allbattle" element={<AllBattle />} />
+                  <Route exact path="/edit/:id" element={<EditBattle />} />
+                  {/* // for adding coin to user  */}
+                  <Route
+                    exact
+                    path="/givecointouser"
+                    element={<GiveCoinToUser />}
+                  />
+                  <Route exact path="/coinofuser" element={<Coinofuser />} />
+                  <Route exact path="/listedgame" element={<ListedGame />} />
+                  <Route
+                    exact
+                    path="/gameplayinput"
+                    element={<GamePlayInput />}
+                  />
+                  <Route
+                    exact
+                    path="/waitingforcode"
+                    element={<Waitingforcode />}
+                  />
+                  <Route exact path="/gameexpired" element={<GameExpired />} />
+                  <Route
+                    exact
+                    path="/startthegame"
+                    element={<StarttheGame />}
+                  />
+                  <Route
+                    exact
+                    path="/imageuploader"
+                    element={<ImageUploader />}
+                  />
+                  <Route exact path="/superadmin" element={<SuperAdmin />} />
+                  <Route
+                    exact
+                    path="/superadmin/adminuserforgame"
+                    element={<AdminUserForGame />}
+                  />
+                  <Route
+                    exact
+                    path="/superadmin/alladminplayer"
+                    element={<AllAdminPlayer />}
+                  />
+                </Route>
+              </Routes>
+            </Container>
           </BattleProvider>
         </TimerProvider>
       </AuthProvider>

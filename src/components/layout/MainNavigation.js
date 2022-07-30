@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react"
+import React, { Fragment, useCallback, useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { FaBars } from "react-icons/fa"
 
@@ -28,8 +28,8 @@ const MainNavigation = () => {
   }, [])
 
   const navigationRoutes = routes.map(({ route, text }, index) => {
-    if (token && (route === "/signup" || route === "/login")) return 0
-    if (!token && route === "/logout") return 0
+    if (token && (route === "/signup" || route === "/login")) return <Fragment key={index}/>
+    if (!token && route === "/logout") return <Fragment key={index}/>
     if (token && route === "/logout") {
       return (
         <NavItem key={index}>
@@ -63,6 +63,7 @@ const MainNavigation = () => {
 
         <div>
           <Button
+          title="Menu"
             color="light"
             className={classes["btn-menu"]}
             id={classes["btn-transparent"]}

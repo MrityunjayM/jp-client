@@ -36,6 +36,7 @@ function SignUp() {
             type={isRevealPwd ? "text" : "password"}
             required
             placeholder="Password"
+            autoComplete="off"
             ref={password}
           />
           <img
@@ -46,7 +47,7 @@ function SignUp() {
           />
         </div>
         <div style={{padding: 0}}>
-        <button type="submit" className={classes["btn-signup"]}>Submit</button>
+        <button title="SignUp" type="submit" className={classes["btn-signup"]}>Submit</button>
         </div>
       </form>
     </div>

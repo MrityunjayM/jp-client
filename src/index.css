@@ -12,7 +12,7 @@ body {
   height: 100vh !important;
   max-width: 460px !important;
   margin: auto;
-  
+  background-color: #f5ffa5;
 }
 
 .appclass{
@@ -54,4 +54,8 @@ button.btn-close{
   max-width: 460px;
   border-right: 1px solid rgba(0,0,0,.2);
   transform: translateX(-100%);
+}
+
+.spinner-containers ~ * {
+  opacity: .2 !important;
 }
