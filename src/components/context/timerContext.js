@@ -32,6 +32,6 @@ export const TimerProvider = ({ children }) => {
   //       }
   //     }, 1000);
   //   };
-  return <Provider value={timer}>{children}</Provider>;
+  return <Provider value={{timer, setTimer}}>{children}</Provider>;
   // }
 };

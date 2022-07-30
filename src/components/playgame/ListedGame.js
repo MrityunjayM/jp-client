@@ -33,7 +33,7 @@ const ListedGame = () => {
     numberofPlayers,
     waitingPlayer
   ) => {
-    setLoading(true)
+    setLoading(prev => prev ? prev: !prev)
     let x = 0
     const timer = setInterval(async () => {
       const checkingwait = await axios.post("/api/playgame/waitingplayer", {
@@ -53,7 +53,7 @@ const ListedGame = () => {
       setLoading(false)
       // this is for admin purpose...
       if (x === 45) {
-        const giveCommandtoadmin = await axios.post(
+        await axios.post(
           "/api/playgame/giveittoadmin",
           {
             name,
@@ -93,7 +93,7 @@ const ListedGame = () => {
               bulk of the card's content.
             </CardText>
             <Button
-              onClick={(e) => {
+              onClick={() => {
                 handlingPlayer(
                   e.name,
                   e.pricetoenter,

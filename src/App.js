@@ -29,9 +29,10 @@ import Home from "./components/user/Home"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
+
   useEffect(() => {
     OneSignal.init({
-      appId: "5f4f8f0b-19aa-4ef4-9113-319e4ba7e91a",
+      appId: process.env.REACT_APP_ONE_SIGNAL_ID || "",
     })
   }, [])
 
@@ -40,10 +41,8 @@ const App = () => {
       <AuthProvider>
         <TimerProvider>
           {/* Static component */}
-
           <MainNavigation />
           <Spinner />
-
           {/* Routing component */}
           {/* {["/", "/home"]} */}
           <BattleProvider>

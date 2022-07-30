@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
 
 const GameExpired = () => {
   const location = useLocation();
-  const { gameexpired, data } = location.state;
+  const { gameexpired } = location.state;
   useEffect(() => {
     // fn();
   }, []);

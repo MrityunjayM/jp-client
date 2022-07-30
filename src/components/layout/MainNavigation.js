@@ -28,8 +28,8 @@ const MainNavigation = () => {
   }, [])
 
   const navigationRoutes = routes.map(({ route, text }, index) => {
-    if (token && (route === "/signup" || route === "/login")) return
-    if (!token && route === "/logout") return
+    if (token && (route === "/signup" || route === "/login")) return 0
+    if (!token && route === "/logout") return 0
     if (token && route === "/logout") {
       return (
         <NavItem key={index}>
