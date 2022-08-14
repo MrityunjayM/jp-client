@@ -1,7 +1,10 @@
 import React from "react";
+import ListedGame from "../playgame/ListedGame";
 
 function Home(props) {
-  return <div>text-center</div>;
+  return (
+    <ListedGame />
+  )
 }
 
 export default Home;

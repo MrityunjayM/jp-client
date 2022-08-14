@@ -7,17 +7,20 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  width: 100%;
+  font-family: 'Open Sans', sans-serif;  
+  width: 100vw !important;
   height: 100vh !important;
-  max-width: 460px !important;
-  margin: auto;
+  /* max-width: 460px !important; */
+  /* margin: auto; */
   background-color: #f5ffa5;
 }
 
-.appclass{
-  background-color: #e1daff;
+#root, .appclass{
+  width: 100% !important;
+  max-width: 460px !important;
   min-height: 100vh !important;
+  margin: auto;
+  background-color: #e1daff;
 }
 
 h1 {

@@ -27,19 +27,21 @@ const MainNavigation = () => {
     return 0
   }, [])
 
-  const navigationRoutes = routes.map(({ route, text }, index) => {
-    if (token && (route === "/signup" || route === "/login")) return <Fragment key={index}/>
-    if (!token && route === "/logout") return <Fragment key={index}/>
+  const navigationRoutes = routes.map(({ route, text, adminRoute }, index) => {
+    if (token && (route === "/signup" || route === "/login"))
+      return <Fragment key={index} />
+    if (!token && route === "/logout") return <Fragment key={index} />
     if (token && route === "/logout") {
       return (
         <NavItem key={index}>
-          <NavLink to="#logout" className="nav-link" onClick={handleLogout}>
+          <NavLink to="/logout" className="nav-link" onClick={handleLogout}>
             {text}
           </NavLink>
         </NavItem>
       )
     }
-
+    if (token && !user.admin && adminRoute) return <Fragment key={index} />
+    if (!token && adminRoute) return <Fragment key={index} />
     return (
       <NavItem key={index}>
         <NavLink
@@ -54,6 +56,7 @@ const MainNavigation = () => {
       </NavItem>
     )
   })
+
   return (
     <div className={classes.navigation}>
       <Navbar color="faded" light>
@@ -63,7 +66,7 @@ const MainNavigation = () => {
 
         <div>
           <Button
-          title="Menu"
+            title="Menu"
             color="light"
             className={classes["btn-menu"]}
             id={classes["btn-transparent"]}
@@ -85,7 +88,7 @@ const MainNavigation = () => {
             <OffcanvasBody>
               {user && (
                 <Badge color="primary" className="ms-3">
-                  {user}
+                  {user.phoneNo}
                 </Badge>
               )}
               <Nav className="flex-column">{navigationRoutes}</Nav>

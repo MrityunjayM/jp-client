@@ -14,9 +14,11 @@ import { battleContext } from "../context/battleContext"
 import { spinnerContext } from "../context/spinnerContext"
 
 import classes from "./Game.module.css"
+import { authContext } from "../context/authContext"
 
 const ListedGame = () => {
   const { fetchBattle, battleData, setBattleData } = useContext(battleContext)
+  const { user, token } = useContext(authContext)
   const { setLoading, loading } = useContext(spinnerContext)
   const navigate = useNavigate()
 
@@ -25,7 +27,9 @@ const ListedGame = () => {
     setBattleData(fetchedData.data)
   }, [fetchBattle])
 
-  useEffect(() => { fn() }, [fn])
+  useEffect(() => {
+    fn()
+  }, [fn])
 
   const handlingPlayer = async (
     name,
@@ -33,7 +37,12 @@ const ListedGame = () => {
     numberofPlayers,
     waitingPlayer
   ) => {
-    setLoading(prev => prev ? prev: !prev)
+    if (!token && !user) {
+      navigate("/login")
+      return 0
+    }
+
+    setLoading((prev) => (prev ? prev : !prev))
     let x = 0
     const timer = setInterval(async () => {
       const checkingwait = await axios.post("/api/playgame/waitingplayer", {
@@ -53,15 +62,12 @@ const ListedGame = () => {
       setLoading(false)
       // this is for admin purpose...
       if (x === 45) {
-        await axios.post(
-          "/api/playgame/giveittoadmin",
-          {
-            name,
-            pricetoenter,
-            numberofPlayers,
-            waitingPlayer,
-          }
-        )
+        await axios.post("/api/playgame/giveittoadmin", {
+          name,
+          pricetoenter,
+          numberofPlayers,
+          waitingPlayer,
+        })
         alert("command of this section will goes to adminnn")
       }
 
@@ -81,7 +87,7 @@ const ListedGame = () => {
   // <Spinner />
   return (
     <div>
-      {battleData.map((e,key) => (
+      {battleData.map((e, key) => (
         <Card className={classes.styled_card} key={key}>
           <CardBody>
             <CardTitle tag="h5">{e.name}</CardTitle>
